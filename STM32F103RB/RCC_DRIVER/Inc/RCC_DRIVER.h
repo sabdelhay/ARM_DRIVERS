@@ -126,6 +126,6 @@ void RCC_setSysClk(enum clockType clkType);
 void RCC_PLLConfig(enum PLLClkSrc pllClkSrc, int PLLMulVal);
 void RCC_HSEConfig(enum HSESrc hseSrc);
 void RCC_PeripheralClocks(enum Peripheral peripheral, uint8_t enable);
-void errorsHandling();
+void errorsHandling(ErrorCode error);
 
 #endif

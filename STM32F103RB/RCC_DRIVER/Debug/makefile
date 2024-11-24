@@ -59,8 +59,8 @@ all: main-build
 main-build: RCC_DRIVER.elf secondary-outputs
 
 # Tool invocations
-RCC_DRIVER.elf RCC_DRIVER.map: $(OBJS) $(USER_OBJS) G:\Electronics\ARM\ARM-Diploma\Projects\RCC_DRIVER\STM32F103RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "RCC_DRIVER.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"G:\Electronics\ARM\ARM-Diploma\Projects\RCC_DRIVER\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="RCC_DRIVER.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+RCC_DRIVER.elf RCC_DRIVER.map: $(OBJS) $(USER_OBJS) G:\Electronics\ARM\ARM-Diploma\Projects\ARM_DRIVERS\STM32F103RB\RCC_DRIVER\STM32F103RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "RCC_DRIVER.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"G:\Electronics\ARM\ARM-Diploma\Projects\ARM_DRIVERS\STM32F103RB\RCC_DRIVER\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="RCC_DRIVER.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

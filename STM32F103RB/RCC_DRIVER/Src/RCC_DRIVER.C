@@ -28,6 +28,7 @@ void Rcc_setClkSts(enum clockType clktype, enum Status status) {
                     counter++;
                     if (counter >= timeout) {
                         ERROR_STATE = -1;
+                        errorsHandling(ERROR_STATE);
                         break;
                     }
                 }
@@ -56,6 +57,7 @@ void Rcc_setClkSts(enum clockType clktype, enum Status status) {
                     counter++;
                     if (counter >= timeout) {
                         ERROR_STATE = -1;
+                        errorsHandling(ERROR_STATE);
                         break;
                     }
                 }
@@ -69,6 +71,7 @@ void Rcc_setClkSts(enum clockType clktype, enum Status status) {
                         counter++;
                         if (counter >= timeout){
                             ERROR_STATE = -1;
+                            errorsHandling(ERROR_STATE);
                             break;
                         }
                     }
@@ -85,6 +88,7 @@ void Rcc_setClkSts(enum clockType clktype, enum Status status) {
                     counter++;
                     if (counter >= timeout) {
                         ERROR_STATE = -1;
+                        errorsHandling(ERROR_STATE);
                         break;
                     }
                 }
@@ -108,6 +112,7 @@ void Rcc_setClkSts(enum clockType clktype, enum Status status) {
 
         default:
             ERROR_STATE = -2;
+            errorsHandling(ERROR_STATE);
             break;
     }
 }
@@ -132,6 +137,7 @@ void RCC_setSysClk(enum clockType clkType){
 
   default:
       ERROR_STATE = -2;
+      errorsHandling(ERROR_STATE);
      break;
   }
   errorFlag = ERROR_NONE;
@@ -151,6 +157,7 @@ void RCC_HSEConfig(enum HSESrc hseSrc){
 
    default:
      ERROR_STATE = -2;
+     errorsHandling(ERROR_STATE);
      break;
   }
   errorFlag = ERROR_NONE;
@@ -184,6 +191,7 @@ void RCC_PLLConfig(enum PLLClkSrc pllClkSrc, int PLLMulVal) {
         RCC->RCC_CFGR |= ((PLLMulVal - 2) << PLLMUL0);
     } else {
         ERROR_STATE = -3;
+        errorsHandling(ERROR_STATE);
     }
     errorFlag = ERROR_NONE;
 }
@@ -230,15 +238,16 @@ void RCC_PeripheralClocks(enum Peripheral peripheral, uint8_t enable) {
             break;
 
         default:
-            ERROR_STATE = -2; // Invalid bus type
-            return;
+            ERROR_STATE = -2;
+            // Invalid bus type
+            errorsHandling(ERROR_STATE);
     }
 
     ERROR_STATE = 0; // No error
 }
 
 //Errors handling
-void errorsHandling(){
+void errorsHandling(ErrorCode error){
   if(ERROR_STATE == -1){
       errorFlag = ERROR_TIMEOUT;
   }else if(ERROR_STATE == -2){
